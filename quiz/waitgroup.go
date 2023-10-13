@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"math/rand"
 	"time"
 )
@@ -53,6 +52,8 @@ func main() {
 	player <- new(Player)
 
 	finish(done)
+	//	Output example
+	// Player D lost, total hit:  13 with Value:  99
 }
 
 type Player struct {
@@ -67,13 +68,12 @@ func PlayPingPong(Name string, Hit, Done chan *Player) {
 		case h := <-Hit:
 
 			v := rand.Intn(100-1) + 1
-			//log.Println(h)
 			h.Hit++
 			h.Name = Name
-			fmt.Println(h.Name, "= Hit", h.Hit)
+			fmt.Println(h.Name, "= Hit", h.Hit, "with Value: ", v)
 
 			if v%setPoint == 0 {
-				log.Println(Name, "fail in value", v)
+				fmt.Println(h.Name, "lost, total hit: ", h.Hit, "with value: ", v)
 				Done <- h
 				break
 			}
@@ -85,8 +85,7 @@ func PlayPingPong(Name string, Hit, Done chan *Player) {
 func finish(Done chan *Player) {
 	for {
 		select {
-		case d := <-Done:
-			fmt.Println(d.Name, "kalah, total hit: ", d.Hit)
+		case _ = <-Done:
 			return
 		}
 	}
