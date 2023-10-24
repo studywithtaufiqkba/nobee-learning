@@ -15,7 +15,7 @@ const (
 
 	//	config authentication
 	ConfigAuthEmail    = "taufiqkurniawan9991@gmail.com"
-	ConfigAuthPassword = "bbcy gpxn qmxj fgdn"
+	ConfigAuthPassword = "APP_PASSWORD"
 )
 
 func sendMail(to []string, cc []string, subject, message string) (err error) {
